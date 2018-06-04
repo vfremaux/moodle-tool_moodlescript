@@ -17,6 +17,6 @@ class script_form extends moodleform {
         $mform->addElement('textarea', 'script', get_string('script', 'tool_moodlescript'), array('cols' => 100, 'rows' => 20));
         $mform->setType('step', PARAM_TEXT);
 
-        $this->add_action_buttons();
+        $this->add_action_buttons(true, get_string('parse', 'tool_moodlescript'));
     }
 }

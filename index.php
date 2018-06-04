@@ -21,14 +21,17 @@
 require('../../../config.php');
 
 require_once($CFG->dirroot.'/local/moodlescript/lib.php');
-require_once($CFG->dirroot.'/local/moodlescript/classes/engine/parser.class.php');
 require_once($CFG->dirroot.'/admin/tool/moodlescript/forms/script_form.php');
+
+local_moodlescript_load_engine();
 
 $url = new moodle_url('/admin/tool/moodlescript/index.php');
 
 require_login();
 
 $context = context_system::instance();
+require_capability('moodle/site:config', $context);
+
 $PAGE->set_url($url);
 $PAGE->set_context($context);
 
@@ -38,18 +41,32 @@ $globalcontext->currentuserid = $USER->id;
 $globalcontext->currentusername = $USER->username;
 $globalcontext->siteshortname = $SITE->shortname;
 
+$renderer = $PAGE->get_renderer('tool_moodlescript');
+
+$step = optional_param('step', PROCESSING_INPUT, PARAM_INT);
+$save = optional_param('save', 0, PARAM_INT);
+$script = optional_param('script', '', PARAM_RAW);
+
+if ($save) {
+    $params = array('script' => $script);
+    $saveurl = new moodle_url('/admin/tool/moodlescript/pro/edit.php', $params);
+    redirect($saveurl);
+}
+
 echo $OUTPUT->header();
 
 echo $OUTPUT->heading(get_string('executescript', 'tool_moodlescript'));
 
-$step = optional_param('step', PROCESSING_INPUT, PARAM_INT);
+if (tool_moodlescript_supports_feature('scripts/bank')) {
+    echo $renderer->bankbutton();
+}
 
 switch ($step) {
     case PROCESSING_INPUT: {
 
         echo $OUTPUT->heading(get_string('script', 'tool_moodlescript'), 3);
         $formdata = new StdClass;
-        $formdata->script = optional_param('script', '', PARAM_TEXT);
+        $formdata->script = optional_param('script', '', PARAM_RAW);
         $form = new script_form();
         $form->set_data($formdata);
         $form->display();
@@ -69,9 +86,16 @@ switch ($step) {
         $parser->parse($globalcontext);
 
         echo $OUTPUT->heading(get_string('validationresult', 'tool_moodlescript'), 3);
-        echo '<pre>';
-        echo $parser->print_errors();
-        echo '</pre>';
+
+        $str = '<pre>';
+        $str .=  $parser->print_errors();
+        $str .= '</pre>';
+
+        if (!$parser->has_errors()) {
+            echo $OUTPUT->notification($str, 'notifysuccess');
+        } else {
+            echo $OUTPUT->notification($str, 'notifyproblem');
+        }
 
         echo $OUTPUT->heading(get_string('stack', 'tool_moodlescript'), 3);
         echo '<pre>';
@@ -83,12 +107,26 @@ switch ($step) {
         echo $parser->print_trace();
         echo '</pre>';
 
+        echo $OUTPUT->box_start('tool-moodlescript-inline');
+
         if (!$parser->has_errors()) {
             $params = array('run' => 1, 'sesskey' => sesskey(), 'script' => $script, 'step' => PROCESSING_RUNNING);
             $buttonurl = new moodle_url('/admin/tool/moodlescript/index.php', $params);
             $label = get_string('runstack', 'tool_moodlescript');
             echo $OUTPUT->single_button($buttonurl, $label);
+
+            $params = array('save' => 1, 'sesskey' => sesskey(), 'script' => $script, 'step' => PROCESSING_PARSING);
+            $buttonurl = new moodle_url('/admin/tool/moodlescript/index.php', $params);
+            $label = get_string('save', 'tool_moodlescript');
+            echo $OUTPUT->single_button($buttonurl, $label);
         }
+
+        $params = array('run' => 0, 'sesskey' => sesskey(), 'script' => $script, 'step' => PROCESSING_INPUT);
+        $buttonurl = new moodle_url('/admin/tool/moodlescript/index.php', $params);
+        $label = get_string('change', 'tool_moodlescript');
+        echo $OUTPUT->single_button($buttonurl, $label);
+
+        echo $OUTPUT->box_end();
 
         break;
     }
@@ -133,6 +171,11 @@ switch ($step) {
             echo $OUTPUT->single_button($buttonurl, $label);
 
             echo '</div>';
+        } else {
+            echo $OUTPUT->heading(get_string('runtimeerrors', 'tool_moodlescript'), 3);
+            echo '<pre>';
+            echo $stack->print_errors();
+            echo '</pre>';
         }
     }
 }
