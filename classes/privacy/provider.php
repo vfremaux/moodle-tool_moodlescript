@@ -14,24 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Plugin version info
- *
- * @package    tool
- * @subpackage moodlescript
- * @copyright  2011 Petr Skoda {@link http://skodak.org}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
+namespace tool_moodlescript\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2018060100; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2017110800; // Requires this Moodle version.
-$plugin->component = 'tool_moodlescript'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '3.4.0 (Build 2018060100)';
-
-// Non moodle attributes.
-$plugin->codeincrement = '3.4.0000';
-$plugin->privacy = 'dualrelease';
-
+class provider implements \core_privacy\local\metadata\null_provider {
+}
