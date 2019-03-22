@@ -9,7 +9,7 @@
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
         <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Name of the script for reference" />
         <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Moodle context this script is applicable" />
-        <FIELD NAME="script" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="the script" />
+        <FIELD NAME="script" TYPE="text" LENGTH="medium" NOTNULL="false" SEQUENCE="false" COMMENT="the script" />
         <FIELD NAME="dirty" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parsing dirtyness" />
         <FIELD NAME="parsestate" TYPE="int" LENGTH="1" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parsing status" />
         <FIELD NAME="sortorder" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Sorting" />
