@@ -21,18 +21,21 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+defined('MOODLE_INTERNAL') || die();
 
 /**
+ * This is part of the dual release distribution system.
  * Tells wether a feature is supported or not. Gives back the
  * implementation path where to fetch resources.
  * @param string $feature a feature key to be tested.
  */
-function tool_moodlescript_supports_feature($feature) {
+function tool_moodlescript_supports_feature($feature= null, $getsupported = false) {
     global $CFG;
     static $supports;
 
-    $config = get_config('tool_moodlescript');
+    if (!during_initial_install()) {
+        $config = get_config('tool_moodlescript');
+    }
 
     if (!isset($supports)) {
         $supports = array(
@@ -44,6 +47,10 @@ function tool_moodlescript_supports_feature($feature) {
             ),
         );
         $prefer = array();
+    }
+
+    if ($getsupported) {
+        return $supports;
     }
 
     // Check existance of the 'pro' dir in plugin.
@@ -58,6 +65,11 @@ function tool_moodlescript_supports_feature($feature) {
         }
     } else {
         $versionkey = 'community';
+    }
+
+    if (empty($feature)) {
+        // Just return version.
+        return $versionkey;
     }
 
     list($feat, $subfeat) = explode('/', $feature);

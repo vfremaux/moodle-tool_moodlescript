@@ -32,16 +32,11 @@ $string['check'] = 'Vérification de script';
 $string['execscript'] = 'Exécuter un script';
 $string['executescript'] = 'Executer un script';
 $string['invalid'] = 'Non valide';
-$string['licenseprovider'] = 'Fournisseur version Pro';
-$string['licenseprovider_desc'] = 'Entrez la clef de votre distributeur.';
-$string['licensekey'] = 'Clef de license pro';
-$string['licensekey_desc'] = 'Entrez ici la clef de produit que vous avez reçu de votre distributeur.';
 $string['log'] = 'Journal d\'exécution';
 $string['newscript'] = 'Nouveau script';
 $string['noscripts'] = 'Aucun script sauvegardé';
 $string['parse'] = 'Vérifier';
 $string['parsestate'] = 'Est parsable';
-$string['plugindist'] = 'Distribution du plugin';
 $string['return'] = 'Revenir';
 $string['reusescript'] = 'Relancer le script';
 $string['run'] = 'Exécuter';
@@ -56,10 +51,4 @@ $string['valid'] = 'Valide';
 $string['validatescript'] = 'Valider un script';
 $string['validationresult'] = 'Résultat de validation';
 
-$string['plugindist_desc'] = '
-<p>Ce plugin est distribué dans la communauté Moodle pour l\'évaluation de ses fonctions centrales
-correspondant à une utilisation courante du plugin. Une version "professionnelle" de ce plugin existe et est distribuée
-sous certaines conditions, afin de soutenir l\'effort de développement, amélioration; documentation et suivi des versions.</p>
-<p>Contactez un distributeur pour obtenir la version "Pro" et son support.</p>
-<p>Notez que les deux composant local_moodlescript et tool_moodlescript doivent fonctionner au même niveau de distribution</p>
-<p><a href="http://www.mylearningfactory.com/index.php/documentation/Distributeurs?lang=fr_utf8">Distributeurs MyLF</a></p>';
+include(__DIR__.'/pro_additional_strings.php');

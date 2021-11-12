@@ -30,21 +30,14 @@ $string['privacy:metadata'] = 'The Moodlescript tool does not directly store any
 $string['change'] = 'Change script';
 $string['check'] = 'Script check';
 $string['context'] = 'Context';
-$string['emulatecommunity'] = 'Emulate the community version.';
 $string['execscript'] = 'Run a script';
 $string['executescript'] = 'Execute script';
 $string['invalid'] = 'Not parsable';
-$string['licensekey'] = 'Pro license key';
-$string['licensekey_desc'] = 'Input here the product license key you got from your provider';
-$string['licenseprovider'] = 'Pro License provider';
-$string['licenseprovider_desc'] = 'Input here your provider key';
 $string['log'] = 'Log';
 $string['newscript'] = 'New script';
 $string['noscripts'] = 'No scripts saved';
 $string['parse'] = 'Parse';
 $string['parsestate'] = 'Parse state';
-$string['plugindist'] = 'Plugin distribution';
-$string['plugindist'] = 'Plugin distribution';
 $string['return'] = 'Return';
 $string['reusescript'] = 'Reuse script';
 $string['run'] = 'Run';
@@ -65,10 +58,4 @@ Switches the code to the community version. The result will be more compatible,
 but some features will not be available anymore.
 ';
 
-$string['plugindist_desc'] = '
-<p>This plugin is the community version and is published for anyone to use as is and check the plugin\'s
-core application. A "pro" version of this plugin exists and is distributed under conditions to feed the life cycle, upgrade, documentation
-and improvement effort.</p>
-<p>Note that both components tool_moodlescript and local_moodlescript must work using the same distribution level.</p>
-<p>Please contact one of our distributors to get "Pro" version support.</p>
-<p><a href="http://www.mylearningfactory.com/index.php/documentation/Distributeurs?lang=en_utf8">MyLF Distributors</a></p>';
+include(__DIR__.'/pro_additional_strings.php');

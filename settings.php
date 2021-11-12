@@ -27,17 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot.'/admin/tool/moodlescript/lib.php');
 
-// PATCH+ : Adminsettings takeover
-// settings default init
-if (is_dir($CFG->dirroot.'/local/adminsettings')) {
-    // Integration driven code.
-    require_once($CFG->dirroot.'/local/adminsettings/lib.php');
-    list($hasconfig, $hassiteconfig, $capability) = local_adminsettings_access();
-} else {
-    // Standard Moodle code.
-    $hasconfig = $hassiteconfig = has_capability('moodle/site:config', context_system::instance());
-}
-
 if ($hassiteconfig) {
     $toolurl = new moodle_url('/admin/tool/moodlescript/index.php');
     $label = get_string('execscript', 'tool_moodlescript');
@@ -47,7 +36,8 @@ if ($hassiteconfig) {
 
     if (tool_moodlescript_supports_feature('emulate/community') == 'pro') {
         include_once($CFG->dirroot.'/admin/tool/moodlescript/pro/prolib.php');
-        \tool_moodlescript\pro_manager::add_settings($ADMIN, $settings);
+        $promanager = tool_moodlescript\pro_manager::instance();
+        $promanager->add_settings($ADMIN, $settings);
     } else {
         $label = get_string('plugindist', 'tool_moodlescript');
         $desc = get_string('plugindist_desc', 'tool_moodlescript');
