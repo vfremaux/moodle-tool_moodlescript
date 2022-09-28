@@ -15,24 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Plugin version info
- *
- * @package    tool
- * @subpackage moodlescript
- * @copyright  2018 Valery Fremaux {@link http://skodak.org}
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   tool_moodlescript
+ * @category  tool
+ * @copyright 2006 Valery Fremaux
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021112000; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2020060900; // Requires this Moodle version.
-$plugin->component = 'tool_moodlescript'; // Full name of the plugin (used for diagnostics).
-$plugin->maturity = MATURITY_BETA;
-$plugin->release = '3.9.0 (Build 2021112000)';
-$plugin->dependencies = array('local_moodlescript' => 2017082401);
-
-// Non moodle attributes.
-$plugin->codeincrement = '3.9.0000';
-$plugin->privacy = 'dualrelease';
-
+$definitions = array(
+    'pro' => array(
+        'mode' => cache_store::MODE_APPLICATION
+    )
+);
