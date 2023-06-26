@@ -25,15 +25,15 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2023062604; // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2020060900; // Requires this Moodle version.
+$plugin->version   = 2023062605; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->requires  = 2022112801; // Requires this Moodle version.
 $plugin->component = 'tool_moodlescript'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_RC;
-$plugin->release = '3.9.0 (Build 2023062604)';
+$plugin->release = '4.1.0 (Build 2023062605)';
 $plugin->dependencies = array('local_moodlescript' => 2017082401);
-$plugin->supported = [400, 401];
+$plugin->supported = [401, 402];
 
 // Non moodle attributes.
-$plugin->codeincrement = '4.0.0000';
+$plugin->codeincrement = '4.1.0000';
 $plugin->privacy = 'dualrelease';
 
