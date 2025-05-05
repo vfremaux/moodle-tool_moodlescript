@@ -17,23 +17,22 @@
 /**
  * Plugin version info
  *
- * @package    tool
- * @subpackage moodlescript
+ * @package    tool_moodlescript
  * @copyright  2018 Valery Fremaux {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2023062605; // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2025011400; // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2022112801; // Requires this Moodle version.
 $plugin->component = 'tool_moodlescript'; // Full name of the plugin (used for diagnostics).
 $plugin->maturity = MATURITY_RC;
-$plugin->release = '4.1.0 (Build 2023062605)';
+$plugin->release = '4.5.0 (Build 2023062605)';
 $plugin->dependencies = array('local_moodlescript' => 2017082401);
-$plugin->supported = [401, 402];
+$plugin->supported = [401, 405];
 
 // Non moodle attributes.
-$plugin->codeincrement = '4.1.0000';
+$plugin->codeincrement = '4.5.0000';
 $plugin->privacy = 'dualrelease';
 
